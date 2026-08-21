@@ -8,6 +8,11 @@ app = Flask(__name__)
 # Configurando a pasta de arquivos estáticos
 app.static_folder = 'static'
 
+@app.route('/')
+def index():
+
+    return render_template_string(views.index())
+
 @app.route('/submit', methods=['POST'])
 def submit_form():
     titulo = request.form.get('titulo')  # Obtém o valor do campo 'titulo'

@@ -16,5 +16,4 @@ def add_data(caminho, nova_anotacao):
 def load_template(arquivo):
     caminho_completo = f'static/templates/{arquivo}'
     with open(caminho_completo, 'r') as arquivo:
-            return str(arquivo)
-    
+            return arquivo.read()
