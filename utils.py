@@ -1,19 +1,52 @@
-import json
+import sqlite3
+from pathlib import Path
 
-def load_data(caminho):
-    caminho_completo = f'static/data/{caminho}'
-    with open(caminho_completo, 'r', encoding='utf-8') as arquivo:
-        return json.load(arquivo)
 
-def add_data(caminho, nova_anotacao):
-    dados = load_data(caminho)
-    dados.append(nova_anotacao)
+BASE_DIR = Path(__file__).parent
+DATABASE = BASE_DIR / 'banco.db'
 
-    caminho_completo = f'static/data/{caminho}'
-    with open(caminho_completo, 'w', encoding='utf-8') as arquivo:
-        json.dump(dados, arquivo, ensure_ascii=False, indent=2)
+
+def create_table():
+    connection = sqlite3.connect(DATABASE)
+    try:
+        connection.execute('''
+            CREATE TABLE IF NOT EXISTS note (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                title TEXT NOT NULL,
+                content TEXT NOT NULL
+            )
+        ''')
+        connection.commit()
+    finally:
+        connection.close()
+
+
+def load_data():
+    create_table()
+    connection = sqlite3.connect(DATABASE)
+    connection.row_factory = sqlite3.Row
+    try:
+        rows = connection.execute(
+            'SELECT id, title, content FROM note ORDER BY id'
+        ).fetchall()
+        return [dict(row) for row in rows]
+    finally:
+        connection.close()
+
+
+def add_data(nova_anotacao):
+    create_table()
+    connection = sqlite3.connect(DATABASE)
+    try:
+        connection.execute(
+            'INSERT INTO note (title, content) VALUES (?, ?)',
+            (nova_anotacao['title'], nova_anotacao['content']),
+        )
+        connection.commit()
+    finally:
+        connection.close()
 
 def load_template(arquivo):
-    caminho_completo = f'static/templates/{arquivo}'
-    with open(caminho_completo, 'r') as arquivo:
-            return arquivo.read()
+    caminho_completo = BASE_DIR / 'static' / 'templates' / arquivo
+    with open(caminho_completo, 'r', encoding='utf-8') as arquivo_template:
+        return arquivo_template.read()

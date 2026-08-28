@@ -1,0 +1,57 @@
+body {
+  background: #fcfce3;
+}
+
+.username {
+  text-align: right;
+}
+
+.notes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.note {
+  min-height: 180px;
+  padding: 1.5rem;
+  background: #fff59d;
+  color: #3b3521;
+  box-shadow: 0 8px 14px rgb(0 0 0 / 18%);
+  transform: rotate(-1deg);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  overflow-wrap: anywhere;
+}
+
+.note:nth-child(even) {
+  background: #b9f6ca;
+  transform: rotate(1deg);
+}
+
+.note:nth-child(3n) {
+  background: #b3e5fc;
+  transform: rotate(-0.5deg);
+}
+
+.note:nth-child(4n) {
+  background: #f8bbd0;
+  transform: rotate(0.5deg);
+}
+
+.note:hover {
+  box-shadow: 0 14px 22px rgb(0 0 0 / 24%);
+  transform: translateY(-6px) rotate(0deg);
+}
+
+.note h3 {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+}
+
+.note p {
+  margin: 0;
+  line-height: 1.5;
+}
