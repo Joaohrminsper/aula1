@@ -1,4 +1,13 @@
-from utils import add_data, load_data, load_template, delete_data
+from html import escape
+
+from utils import (
+    add_data,
+    delete_data,
+    edit_data,
+    load_data,
+    load_template,
+    update_data,
+)
 
 def index():
     note_template = load_template('components/note.html')
@@ -23,3 +32,17 @@ def submit(titulo, detalhes):
 
 def delete(nota_id):
     delete_data(nota_id)
+
+def edit(nota_id):
+    note = edit_data(nota_id)
+    if note is None:
+        return None
+
+    return load_template('edit.html').format(
+        id=note.id,
+        title=escape(note.title, quote=True),
+        details=escape(note.content),
+    )
+
+def update(nota_id, titulo, detalhes):
+    update_data(nota_id, titulo, detalhes)

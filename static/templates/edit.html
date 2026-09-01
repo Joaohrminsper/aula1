@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Get-it</title>
+    <img src="{{{{ url_for('static', filename='img/logo-getit-2.png') }}}}" width="100" height="60">
+    <p>Como o Post-it, mas com outro verbo</p>
+    <title>Editar anotação</title>
+    <link rel="stylesheet" href="/static/css/getit.css">
+</head>
+<body>
+    <h1>Editar anotação</h1>
+
+    <form action="/update" method="POST">
+        <input type="hidden" name="id" value="{id}">
+
+        <label for="titulo">Título</label>
+        <input id="titulo" type="text" name="titulo" value="{title}" required>
+
+        <label for="detalhes">Conteúdo</label>
+        <textarea id="detalhes" name="detalhes" required>{details}</textarea>
+
+        <button type="submit">Salvar</button>
+        <a href="/">Cancelar</a>
+    </form>
+</body>
+</html>
