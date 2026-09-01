@@ -50,3 +50,11 @@ def load_template(arquivo):
     caminho_completo = BASE_DIR / 'static' / 'templates' / arquivo
     with open(caminho_completo, 'r', encoding='utf-8') as arquivo_template:
         return arquivo_template.read()
+
+def delete_data(nota_id):
+    connection = sqlite3.connect(DATABASE)
+    try:
+        connection.execute('DELETE FROM note WHERE id = ?', (nota_id,))
+        connection.commit()
+    finally:
+        connection.close()

@@ -16,6 +16,7 @@ body {
 }
 
 .note {
+  position: relative;
   min-height: 180px;
   padding: 1.5rem;
   background: #fff59d;
@@ -24,6 +25,31 @@ body {
   transform: rotate(-1deg);
   transition: transform 180ms ease, box-shadow 180ms ease;
   overflow-wrap: anywhere;
+}
+
+.delete-form {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+}
+
+.delete-button {
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #6b6250;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.delete-button:hover,
+.delete-button:focus-visible {
+  background: rgb(0 0 0 / 10%);
+  color: #b71c1c;
 }
 
 .note:nth-child(even) {
@@ -47,7 +73,7 @@ body {
 }
 
 .note h3 {
-  margin: 0 0 1rem;
+  margin: 0 2rem 1rem 0;
   font-size: 1.25rem;
 }
 

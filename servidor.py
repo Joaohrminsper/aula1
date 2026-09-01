@@ -21,6 +21,12 @@ def submit_form():
     views.submit(titulo, detalhes)
     return redirect('/')
 
+@app.route('/delete', methods=['POST'])
+def delete_note():
+    nota_id = request.form.get('id')
+    views.delete(nota_id)
+    return redirect('/')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
